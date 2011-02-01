@@ -1,0 +1,136 @@
+#!/bin/sh
+# .:[ rawk - rage against web frameworks ]:.
+# 
+# generates a static content from a tree of markdown files and other content
+# originally written by 4096r/b7b720d6  "kyle isom <coder@kyleisom.net>"
+# based on the suckless webframework (sw) by nibblesec
+# 
+# released as public domain software - for curiosity's sake, i'd be interested 
+# in hearing if you take this and tinker with it, though you are far from 
+# obligated to do so.
+# 
+# in the event your locale's public domain laws are less strict than the ISC
+# license, this code is licensed under the ISC license. 
+
+CONF_FILE="rawkrc"
+SITE_ROOT="/"
+
+usage () {
+    echo "usage: $0 <source dir>"
+    #exit 0
+}
+
+rawk_header () {
+    PAGE_TITLE="$(basename $1 | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
+    ROOT_LINK="$(dirname $1 | sed -e "s|^\./||" \
+                                  -e "s|[^/]*|..|")"
+
+    # sedden death
+    echo $(cat ${HDR_TPL} | sed -e "s|\${TITLE}|$SITE_TITLE|g"              \
+                                -e "s|\${SUBTITLE}|$SITE_SUBTITLE|"         \
+				-e "s|\${SITE_ROOT}|$SITE_ROOT|"            \
+                                -e "s|\${ROOT_LINK}|$ROOT_LINK/|"
+    )
+}
+
+rawk_submenu () {
+    FC="| grep -v '^$(basename $1)\$'"    # filter chain
+    FILE_LIST=""
+
+    # add cwd
+    echo '<div id="side-bar">'
+    echo '<a href="index.html">.</a> '
+
+    # parent
+    if [ ! "$(dirname $1)" = "." ]; then
+        echo '<a href="../index.html">..</a> '
+    fi
+
+    for filter in $BL
+    do
+        FC="$FC | grep -v '$filter'"
+    done
+    
+    FILE_LIST="$(eval ls -1 $(dirname $1) $FC )"
+    FILE_LIST="$(echo $FILE_LIST | sed -e 's/\.md /\.html /g')"
+    FILE_LIST="$(echo $FILE_LIST | uniq | sort | xargs)"
+    for FILE in $FILE_LIST
+    do
+        echo -n "<a href=\"$(basename $FILE | sed -e 's/\.md$/\.html/g')\">"
+        echo -n "$(basename $FILE | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/')"
+        echo "</a> "
+    done
+    echo "</div>"
+}
+
+rawk_page () {
+    # clear out vars
+    PAGE=""
+    FOOTER=""
+
+    rawk_header $1
+    rawk_submenu $1
+    
+    echo '<div id="main">'
+    echo "$($MDPARSER $1)"
+    echo '</div>'
+
+    rawk_footer $1
+}
+
+rawk_footer() {
+    echo $(cat $FTR_TPL)
+}
+
+rawk_main () {
+    # check to see which arguments we got
+    # if we got any, rename them for clarity
+    if [ -n "$1" ]; then
+        SRC_DIR="$1"
+    fi
+
+    if [ -n "$2" ]; then 
+        TARGET="$2"
+    fi
+
+    # at a minimum, require a source directory
+    if [ -z "${SRC_DIR}" ]; then
+        usage
+    elif [ -z "${TARGET}" ]; then
+        # sane default
+        TARGET="$(pwd)/$(basename ${SRC_DIR}).build"
+    fi
+
+    # copy over target dir
+    cp -r ${SRC_DIR} ${TARGET}
+    cd ${TARGET}
+
+    if [ ! -d styles ]; then
+        mkdir styles
+    fi
+
+    echo "$STYLESHEET" >styles/style.css
+
+    # here's where we need to load in the list of files
+    # and convert md->html
+    for SRC_F in $(find ./ -iname \*.md -print | xargs)
+
+    do
+        OUT_F="$(echo $SRC_F | sed -e 's/\([[:alnum:]]*\)\.[mM][dD]/\1/').html"
+        echo "* $SRC_F -> $OUT_F"
+        rawk_page $SRC_F > $OUT_F
+        rm $SRC_F
+    done
+
+}
+
+# source config file and check valid targets and source dirs
+. ./$CONF_FILE
+START="$(pwd)"
+HDR_TPL="$(pwd)/$HDR_TPL"
+FTR_TPL="$(pwd)/$FTR_TPL"
+STYLESHEET="$(sed -s s\|\${SITE_ROOT}\|$SITE_ROOT\| < $STYLESHEET)"
+
+rawk_main $@
+
+cd $START
