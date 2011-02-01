@@ -1,18 +1,18 @@
-where: rawk links
-=================
+where can i get rawk?
+=====================
 
 [sourceforge profile](https://sourceforge.net/projects/rawk-sh/) - contains a
-release tarball and support pages.
+release tarball and support pages.    
 [github page](https://github.com/kisom/rawk) - the latest cutting edge code 
-goes here.
+goes here.   
 [rawk's trac page](https://sourceforge.net/apps/trac/rawk-sh/) - submit support
-tickets or edit the wiki.
+tickets or edit the wiki.    
 [laconica profile](https://sourceforge.net/apps/laconica/rawk-sh/) - quick
-updates on what's going on with the project.
+updates on what's going on with the project.    
 [rss feed](https://sourceforge.net/export/rss2_keepsake.php?group_id=402443) -
-follow the current sourceforge activity.
+follow the current sourceforge activity.    
 [smu](http://s01.de/~tox/index.cgi/proj_smu) - smu is my preferred markdown
-parser, but you can use whichever one you wish.
+parser, but you can use whichever one you wish.    
 
 rawk development is centered around sourceforge. the latest code is always
 synced to github, but is often pushed to the sourceforge git repository as
