@@ -1,3 +1,11 @@
+                                            _                   
+               _      _ __  __ _ __      __| | __     _         
+              (_)    | '__|/ _` |\ \ /\ / /| |/ /    (_)             
+            _  _     | |  | (_| | \ V  V / |   <      _  _ 
+           (_)(_)    |_|   \__,_|  \_/\_/  |_|\_\    (_)(_)
+                                                                     
+
+
 .:[ rage against web frameworks! ]:.
 
 rawk: a markdown-based web framework using only unix commandline tools
@@ -64,3 +72,4 @@ customisations
 links
     $PREFIX/share/rawk/
     http://www.brokenlcd.net/code/rawk.html
+    http://www.network-science.de/ascii/     # ASCII art generator
