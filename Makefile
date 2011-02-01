@@ -5,7 +5,8 @@ all:
 	mkdir -p $(PREFIX)/share/rawk/
 	cp -r ./site $(PREFIX)/share/rawk/
 	install -o root -g bin ./README $(PREFIX)/share/rawk
-	chmod -R 755 $(PREFIX)/share/rawk/
+	find $(PREFIX)/share/rawk/ -type f -exec chmod 644 '{}' \;
+	find $(PREFIX)/share/rawk/ -type d -exec chmod 755 '{}' \;
 
 remove:
 	rm -f  $(PREFIX)/bin/rawk

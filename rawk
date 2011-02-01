@@ -35,7 +35,7 @@ rawk_header () {
 }
 
 rawk_submenu () {
-    FC="| grep -v '^$(echo ${1##*/})\$'"    # filter chain
+    FC="| grep -ve '^$(echo ${1##*/})\$'"   # filter chain
     FILE_LIST=""
 
     # add cwd
@@ -49,7 +49,7 @@ rawk_submenu () {
 
     for filter in $BL
     do
-        FC="$FC | grep -v '$filter'"
+        FC="$FC | grep -ve '$filter'"
     done
     
     FILE_LIST="$(eval ls -1 $(echo ${1%/*}) $FC | sed -e 's/\.md\([ ]*\)/\.html\1/g' | uniq)"
@@ -131,7 +131,7 @@ rawk_main () {
 START="$(pwd)"
 HDR_TPL="$(pwd)/$HDR_TPL"
 FTR_TPL="$(pwd)/$FTR_TPL"
-STYLESHEET="$(sed -s s\|\${SITE_ROOT}\|$SITE_ROOT\| < $STYLESHEET)"
+STYLESHEET="$(sed -e s\|\${SITE_ROOT}\|$SITE_ROOT\| < $STYLESHEET)"
 
 rawk_main $@
 
