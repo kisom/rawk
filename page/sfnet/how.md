@@ -1,6 +1,7 @@
 how is rawk licensed?
 =====================
-this software is dual-licensed as it were.
+this software is dual-licensed under the isc license and released into the
+public domain.
 
 the intent of this is to provide end users with the maximum freedom to use this
 code however. therefore, it is licensed under whichever of these two licenses

@@ -10,3 +10,8 @@ to the site. it will copy that tree over to a build directory and convert
 all markdown files to full pages to create a site with consistent headers,
 footers, and a context menu of sorts.
 
+rawk has been verified on the following systems:
+* linux
+* openbsd
+
+

@@ -2,9 +2,9 @@
 =====
 
 info/  
-[what is rawk](./what.html)   
-[where: rawk links](./where.html)   
-[who](./who.html)   
+[what is rawk?](./what.html)   
+[where can i get rawk?](./where.html)   
+[who is behind rawk?](./who.html)   
 [why write rawk?](./why.html)   
 [how is rawk licensed?](./how.html)   
      

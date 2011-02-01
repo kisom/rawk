@@ -9,7 +9,7 @@
 .:[ rage against web frameworks! ]:.
 
 rawk: a markdown-based web framework using only unix commandline tools
-license: public domain
+license: public domain and isc dual-license
 
 design goals:
 0. simplicity: very customisable but works nearly straight out of the box
