@@ -8,7 +8,7 @@
 
 .:[ rage against web frameworks! ]:.
 
-rawk: a markdown-based web framework using only unix commandline tools
+rawk: a markdown-based web framework using only unix commandline tools    
 license: public domain and isc dual-license
 
 design goals:
