@@ -28,6 +28,9 @@ quick notes:
 * rawk expects at a minimum a path to a tree of markdown files
 * rawk also looks for a second argument which is the output directory
 * if no output directory rawk will use $PWD/$(basename $1).build
+* by default rawk looks for smu; feel free to switch out your markdown parser.
+smu can be obtained from its [homepage](http://s01.de/~tox/index.cgi/proj_smu)
+or by clicking the link at the bottom right of the page.
 
 quick start (the way i do it):
 
