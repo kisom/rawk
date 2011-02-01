@@ -1,0 +1,11 @@
+this is the source to the official rawk site. it serves as an example of how
+a site build might look, as well as verification of the rawk tools. i use this
+to debug rawk and to make sure that it generates everything properly. 
+
+in short, this directory is the test suite for rawk. after installing rawk, you
+should be able to run 'make' and verify that the site was generated. note that
+due to the way rawk generates the code, it will need to be installed on the
+site for stylesheets and links to work.
+
+- kyle isom
+

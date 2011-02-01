@@ -30,11 +30,11 @@ quick notes:
 * if no output directory rawk will use $PWD/$(basename $1).build
 
 quick start (the way i do it):
-0. create a directory for your site, ex. brokenlcd.net
-0. create a directory inside that to hold the actual site source, i.e. 
-brokenlcd.
 
-right now, my site directory looks like:
+0. create a directory for your site, ex. brokenlcd.net
+
+0. create a directory inside that to hold the actual site source, i.e. 
+brokenlcd.  right now, my site directory looks like:
 
     kyle@sterling [ ~/src ] $ ls
     brokenlcd.net/
@@ -44,10 +44,10 @@ right now, my site directory looks like:
 0. copy the sample makefile, templates, and rawkrc from 
 $PREFIX/share/rawk/site to your site directory, i.e.:
 
-    kyle@sterling [ ~/src ] $ ls brokenlcd.net/
-    brokenlcd/  templates/      Makefile    rawkrc
+    `kyle@sterling [ ~/src ] $ ls brokenlcd.net/`   
+    `brokenlcd/  templates/      Makefile    rawkrc`
 
-0. edit rawkrc, changing SITE_TITLE and SITE_SUBTITLE to match your site. 
+0. edit rawkrc, changing SITE\_TITLE and SITE\_SUBTITLE to match your site. 
 you want to use a different markdown interpreter, set MDPARSER 
 appropriately. 
 
@@ -59,11 +59,11 @@ the site).
 customisations
 * the header template should / can contain the following vars:
     ${TITLE}        # site title
-    ${SUB_TITLE}    # site subtitle
+    ${SUB\_TITLE}    # site subtitle
 * you can point rawkrc at your own header / footer templates and stylesheet
 in rawkrc
-* you can change the site root to use for links in the variable SITE_ROOT
-the default is SITE_ROOT="/" so the root links are <a href="/index.html">
+* you can change the site root to use for links in the variable SITE\_ROOT
+the default is SITE\_ROOT="/" so the root links are `<a href="/index.html">`
 * you are encouraged to tweak the source so it does precisely what you wish
 
 links
