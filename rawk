@@ -52,9 +52,8 @@ rawk_submenu () {
         FC="$FC | grep -v '$filter'"
     done
     
-    FILE_LIST="$(eval ls -1 $(echo ${1%/*}) $FC )"
-    FILE_LIST="$(echo $FILE_LIST | sed -e 's/\.md /\.html /g')"
-    FILE_LIST="$(echo $FILE_LIST | uniq | sort | xargs)"
+    FILE_LIST="$(eval ls -1 $(echo ${1%/*}) $FC | sed -e 's/\.md\([ ]*\)/\.html\1/g' | uniq)"
+    FILE_LIST="$(echo \"$FILE_LIST\" | sort | xargs)"
     for FILE in $FILE_LIST
     do
         echo -n "<a href=\"$(basename $FILE | sed -e 's/\.md$/\.html/g')\">"
@@ -102,8 +101,12 @@ rawk_main () {
         TARGET="$(pwd)/$(basename ${SRC_DIR}).build"
     fi
 
+    if [ ! -d "${TARGET}" ]; then
+        mkdir ${TARGET}
+    fi
+
     # copy over target dir
-    cp -r ${SRC_DIR} ${TARGET}
+    cp -r ${SRC_DIR}/* ${TARGET}/
     cd ${TARGET}
 
     if [ ! -d styles ]; then
@@ -115,14 +118,12 @@ rawk_main () {
     # here's where we need to load in the list of files
     # and convert md->html
     for SRC_F in $(find ./ -iname \*.md -print | xargs)
-
     do
         OUT_F="$(echo $SRC_F | sed -e 's/\([[:alnum:]]*\)\.[mM][dD]/\1/').html"
         echo "* $SRC_F -> $OUT_F"
         rawk_page $SRC_F > $OUT_F
         rm $SRC_F
     done
-
 }
 
 # source config file and check valid targets and source dirs

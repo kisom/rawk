@@ -13,3 +13,5 @@ BL="$BL ^keys$"                 # don't link to keys dir
 BL="$BL ^files$"                # don't link to files dir
 BL="$BL ^restrict$ ^private$"   # don't link to private files
 BL="$BL ^index.md$"             # don't link to index
+BL="$BL ^index.html$"
+BL="$BL ^styles$"
