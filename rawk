@@ -21,8 +21,8 @@ usage () {
 }
 
 rawk_header () {
-    PAGE_TITLE="$(basename $1 | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
-    ROOT_LINK="$(dirname $1 | sed -e "s|^\./||" \
+    PAGE_TITLE="$(echo ${1##*/} | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
+    ROOT_LINK="$(echo ${1%/*} | sed -e "s|^\./||" \
                                   -e "s|[^/]*|..|")"
 
     # sedden death
@@ -35,7 +35,7 @@ rawk_header () {
 }
 
 rawk_submenu () {
-    FC="| grep -v '^$(basename $1)\$'"    # filter chain
+    FC="| grep -v '^$(echo ${1##*/})\$'"    # filter chain
     FILE_LIST=""
 
     # add cwd
@@ -43,7 +43,7 @@ rawk_submenu () {
     echo '<a href="index.html">.</a> '
 
     # parent
-    if [ ! "$(dirname $1)" = "." ]; then
+    if [ ! "$(echo ${1%/*})" = "." ]; then
         echo '<a href="../index.html">..</a> '
     fi
 
@@ -52,7 +52,7 @@ rawk_submenu () {
         FC="$FC | grep -v '$filter'"
     done
     
-    FILE_LIST="$(eval ls -1 $(dirname $1) $FC )"
+    FILE_LIST="$(eval ls -1 $(echo ${1%/*}) $FC )"
     FILE_LIST="$(echo $FILE_LIST | sed -e 's/\.md /\.html /g')"
     FILE_LIST="$(echo $FILE_LIST | uniq | sort | xargs)"
     for FILE in $FILE_LIST

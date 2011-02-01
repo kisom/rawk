@@ -1,0 +1,15 @@
+MDPARSER=smu
+HDR_TPL="templates/hdr.tpl"
+FTR_TPL="templates/ftr.tpl"
+SITE_TITLE=".:[ rawk ]:."
+SITE_SUBTITLE="rage against web frameworks"
+STYLESHEET="templates/style.css"
+
+# blacklist definition
+BL="^.*\.sh$"                   # don't link to shell files
+BL="$BL ^.\{1,\}rc$"            # don't link to configs
+BL="$BL ^images$"               # don't link to image dir
+BL="$BL ^keys$"                 # don't link to keys dir
+BL="$BL ^files$"                # don't link to files dir
+BL="$BL ^restrict$ ^private$"   # don't link to private files
+BL="$BL ^index.md$"             # don't link to index
