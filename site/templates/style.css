@@ -25,8 +25,10 @@ body {
 	clear: both;
 	border: 0;
 	margin: 0;
-	padding: 0;
+	padding: 0.3em;
 	background-color: #ddd;
+        white-space: nowrap;
+        line-height: 1.6em;
 }
 
 #side-bar ul {
@@ -39,7 +41,7 @@ body {
 
 #side-bar li { display: inline; line-height: 1.6em; white-space: nowrap; }
 
-#side-bar ul li a {
+#side-bar a {
 	margin: 0;
 	padding: 0.1em 1ex 0.1em 1ex;
 	color: #336699;
@@ -49,7 +51,7 @@ body {
 	border: 0;
 }
 
-#side-bar ul li a:hover { color: #111; text-decoration: none; }
+#side-bar a:hover { color: #111; text-decoration: none; }
  
 /* Main Copy */
 #main {

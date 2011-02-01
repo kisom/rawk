@@ -26,11 +26,12 @@ rawk_header () {
                                   -e "s|[^/]*|..|")"
 
     # sedden death
-    echo $(cat ${HDR_TPL} | sed -e "s|\${TITLE}|$SITE_TITLE|g"              \
-                                -e "s|\${SUBTITLE}|$SITE_SUBTITLE|"         \
-				-e "s|\${SITE_ROOT}|$SITE_ROOT|"            \
-                                -e "s|\${ROOT_LINK}|$ROOT_LINK/|"
+    HDR=$(cat ${HDR_TPL} | sed -e "s|\${TITLE}|$SITE_TITLE|g"          \
+                               -e "s|\${SUBTITLE}|$SITE_SUBTITLE|"     \
+		               -e "s|\${SITE_ROOT}|$SITE_ROOT|"        \
+                               -e "s|\${ROOT_LINK}|$ROOT_LINK/|"
     )
+    echo "$HDR"
 }
 
 rawk_submenu () {
@@ -79,7 +80,7 @@ rawk_page () {
 }
 
 rawk_footer() {
-    echo $(cat $FTR_TPL)
+    echo "$(cat $FTR_TPL)"
 }
 
 rawk_main () {
