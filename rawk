@@ -43,7 +43,7 @@ rawk_submenu () {
     echo '<a href="index.html">.</a> '
 
     # parent
-    if [ ! "$(echo ${1%/*})" = "." ]; then
+    if [ "${1%/*}" != "." ]; then
         echo '<a href="../index.html">..</a> '
     fi
 
@@ -113,7 +113,7 @@ rawk_main () {
 
     # here's where we need to load in the list of files
     # and convert md->html
-    for src_f in $(find ./ -iname \*.md -print | xargs)
+    for src_f in $(find . -iname \*.md -print | xargs)
     do
         out_f="$(echo $src_f | sed -e 's/\([[:alnum:]]*\)\.[mM][dD]/\1/').html"
         echo "* $src_f -> $out_f"
