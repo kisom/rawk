@@ -9,8 +9,8 @@
 # in hearing if you take this and tinker with it, though you are far from 
 # obligated to do so.
 # 
-# in the event your locale's public domain laws are less strict than the ISC
-# license, this code is licensed under the ISC license. 
+# in the event your locale's public domain laws are more restrictive than the 
+# ISC license, this code is licensed under the ISC license. 
 
 conf_file="rawkrc"
 site_root="/"
