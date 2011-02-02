@@ -20,39 +20,25 @@ body {
 .headerSubTitle { font-size: 0.6em; font-weight: normal; margin-left: 1em; }
 
 /* Side */
+/* modified from sw original by jrick (jrick.devio.us) */
 #side-bar {
-	width: 100%;
-	clear: both;
-	border: 0;
-	margin: 0;
-	padding: 0.3em;
-	background-color: #ddd;
-        white-space: nowrap;
-        line-height: 1.6em;
+    clear: both;
+    border: 0;
+    padding-left: 1em;
+    background-color: #ddd;
 }
-
-#side-bar ul {
-	margin: 0;
-	padding: 0.3em;
-	list-style-type: none;
-	list-style-image: none;
-	border: 0;
-}
-
-#side-bar li { display: inline; line-height: 1.6em; white-space: nowrap; }
 
 #side-bar a {
-	margin: 0;
-	padding: 0.1em 1ex 0.1em 1ex;
-	color: #336699;
-	background-color: transparent;
-	text-decoration: none;
-	font-size: 1em;
-	border: 0;
+    display: inline;
+    line-height:2.1em;
+    white-space: nowrap;
+    padding: 0.1ex 1ex 0.1em 1ex;
+    color: #336699;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 1em;
 }
 
-#side-bar a:hover { color: #111; text-decoration: none; }
- 
 /* Main Copy */
 #main {
 	max-width: 70em;
