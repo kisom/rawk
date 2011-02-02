@@ -31,6 +31,7 @@ quick notes:
     * if no output directory rawk will use $PWD/$(basename $1).build
     * rawk looks for smu by default as a markdown parser - change as necessary.
       smu is available at http://s01.de/~tox/index.cgi/proj_smu.
+    * rawk identifies markdown files by the extension .md
 
 quick start (the way i do it):
     1. create a directory for your site, ex. brokenlcd.net

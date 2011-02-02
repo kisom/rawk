@@ -31,6 +31,7 @@ quick notes:
 * by default rawk looks for smu; feel free to switch out your markdown parser.
 smu can be obtained from its [homepage](http://s01.de/~tox/index.cgi/proj_smu)
 or by clicking the link at the bottom right of the page.
+* rawk identifies markdown files by the extension .md
 
 quick start (the way i do it):
 
