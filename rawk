@@ -56,8 +56,8 @@ rawk_submenu () {
     file_list="$(echo \"$file_list\" | sort | xargs)"
     for file in $file_list
     do
-        echo -n "<a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\">"
-        echo -n "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/')"
+        echo  "<a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\"> \c"
+        echo "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/') \c"
         echo "</a> "
     done
     echo "</div>"
