@@ -6,12 +6,9 @@ site_subtitle="rage against web frameworks"
 stylesheet="templates/style.css"
 
 # blacklist definition
-bl="^.*\.sh$"                   # don't link to shell files
-bl="$bl ^.\{1,\}rc$"            # don't link to configs
+bl="^styles$"                   # don't link to styles dir
 bl="$bl ^images$"               # don't link to image dir
 bl="$bl ^keys$"                 # don't link to keys dir
 bl="$bl ^files$"                # don't link to files dir
 bl="$bl ^restrict$ ^private$"   # don't link to private files
 bl="$bl ^index.md$"             # don't link to index
-bl="$bl ^index.html$"
-bl="$bl ^styles$"

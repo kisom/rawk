@@ -20,5 +20,11 @@ left the selection up to the user. if you need one, i would suggest
 [smu](http://s01.de/~tox/index.cgi/proj_smu) - it is what i use for all my
 sites.
 
+actually, an interesting note is that rawk doesn't actually care if you use
+markdown or not - as long as whatever you have produces html output suitable
+for use as the body of the page. this means you could write all your code in
+html (as the body, or modify the header template appropriately) and use
+cat as your parser. if you're not using markdown, you should probably change
+the extensions in the rawk script.
 
 
