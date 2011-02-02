@@ -13,5 +13,12 @@ footers, and a context menu of sorts.
 rawk has been verified on the following systems:
 * linux
 * openbsd
+* os x   
+
+it is important to note that you need a markdown parser. i deliberately
+left the selection up to the user. if you need one, i would suggest 
+[smu](http://s01.de/~tox/index.cgi/proj_smu) - it is what i use for all my
+sites.
+
 
 
