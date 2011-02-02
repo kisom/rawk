@@ -5,6 +5,11 @@ rawk is a static site generator written in the bourne shell. it uses posix
 compliant syntax to support the maximum number of systems and requires only
 a markdown parser and the standard unix tools (grep and sed in particular).
 
+for example, this entire site consists of a tree of markdown files converted
+by rawk to static html via a makefile. to see the source this was generated
+from, take a look at [the github repo](https://github.com/kisom/rawk/tree/master/page).
+this site uses smu (see below) as the markdown processor.
+
 rawk should be fed a tree containing markdown files and any other components
 to the site. it will copy that tree over to a build directory and convert
 all markdown files to full pages to create a site with consistent headers,
