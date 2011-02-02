@@ -12,8 +12,8 @@
 # in the event your locale's public domain laws are less strict than the ISC
 # license, this code is licensed under the ISC license. 
 
-CONF_FILE="rawkrc"
-SITE_ROOT="/"
+conf_file="rawkrc"
+site_root="/"
 
 usage () {
     echo "usage: $0 <source dir>"
@@ -21,22 +21,22 @@ usage () {
 }
 
 rawk_header () {
-    PAGE_TITLE="$(echo ${1##*/} | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
-    ROOT_LINK="$(echo ${1%/*} | sed -e "s|^\./||" \
+    page_title="$(echo ${1##*/} | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
+    root_link="$(echo ${1%/*} | sed -e "s|^\./||" \
                                   -e "s|[^/]*|..|")"
 
     # sedden death
-    HDR=$(cat ${HDR_TPL} | sed -e "s|\${TITLE}|$SITE_TITLE|g"          \
-                               -e "s|\${SUBTITLE}|$SITE_SUBTITLE|"     \
-		               -e "s|\${SITE_ROOT}|$SITE_ROOT|"        \
-                               -e "s|\${ROOT_LINK}|$ROOT_LINK/|"
+    hdr=$(cat ${hdr_tpl} | sed -e "s|\${title}|$site_title|g"          \
+                               -e "s|\${subtitle}|$site_subtitle|"     \
+		               -e "s|\${site_root}|$site_root|"        \
+                               -e "s|\${root_link}|$root_link/|"
     )
-    echo "$HDR"
+    echo "$hdr"
 }
 
 rawk_submenu () {
-    FC="| grep -ve '^$(echo ${1##*/})\$'"   # filter chain
-    FILE_LIST=""
+    fc="| grep -ve '^$(echo ${1##*/})\$'"   # filter chain
+    file_list=""
 
     # add cwd
     echo '<div id="side-bar">'
@@ -47,92 +47,88 @@ rawk_submenu () {
         echo '<a href="../index.html">..</a> '
     fi
 
-    for filter in $BL
+    for filter in $bl
     do
-        FC="$FC | grep -ve '$filter'"
+        fc="$fc | grep -ve '$filter'"
     done
     
-    FILE_LIST="$(eval ls -1 $(echo ${1%/*}) $FC | sed -e 's/\.md\([ ]*\)/\.html\1/g' | uniq)"
-    FILE_LIST="$(echo \"$FILE_LIST\" | sort | xargs)"
-    for FILE in $FILE_LIST
+    file_list="$(eval ls -1 $(echo ${1%/*}) $fc | sed -e 's/\.md\([ ]*\)/\.html\1/g' | uniq)"
+    file_list="$(echo \"$file_list\" | sort | xargs)"
+    for file in $file_list
     do
-        echo -n "<a href=\"$(basename $FILE | sed -e 's/\.md$/\.html/g')\">"
-        echo -n "$(basename $FILE | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/')"
+        echo -n "<a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\">"
+        echo -n "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/')"
         echo "</a> "
     done
     echo "</div>"
 }
 
 rawk_page () {
-    # clear out vars
-    PAGE=""
-    FOOTER=""
-
     rawk_header $1
     rawk_submenu $1
     
     echo '<div id="main">'
-    echo "$($MDPARSER $1)"
+    $mdparser $1
     echo '</div>'
 
     rawk_footer $1
 }
 
 rawk_footer() {
-    echo "$(cat $FTR_TPL)"
+    echo "$(cat $ftr_tpl)"
 }
 
 rawk_main () {
     # check to see which arguments we got
     # if we got any, rename them for clarity
     if [ -n "$1" ]; then
-        SRC_DIR="$1"
+        src_dir="$1"
     fi
 
     if [ -n "$2" ]; then 
-        TARGET="$2"
+        target="$2"
     fi
 
     # at a minimum, require a source directory
-    if [ -z "${SRC_DIR}" ]; then
+    if [ -z "${src_dir}" ]; then
         usage
-    elif [ -z "${TARGET}" ]; then
+    elif [ -z "${target}" ]; then
         # sane default
-        TARGET="$(pwd)/$(basename ${SRC_DIR}).build"
+        target="$(pwd)/$(basename ${src_dir}).build"
     fi
 
-    if [ ! -d "${TARGET}" ]; then
-        mkdir ${TARGET}
+    if [ ! -d "${target}" ]; then
+        mkdir ${target}
     fi
 
     # copy over target dir
-    cp -r ${SRC_DIR}/* ${TARGET}/
-    cd ${TARGET}
+    cp -r ${src_dir}/* ${target}/
+    cd ${target}
 
     if [ ! -d styles ]; then
         mkdir styles
     fi
 
-    echo "$STYLESHEET" >styles/style.css
+    echo "$stylesheet" >styles/style.css
 
     # here's where we need to load in the list of files
     # and convert md->html
-    for SRC_F in $(find ./ -iname \*.md -print | xargs)
+    for src_f in $(find ./ -iname \*.md -print | xargs)
     do
-        OUT_F="$(echo $SRC_F | sed -e 's/\([[:alnum:]]*\)\.[mM][dD]/\1/').html"
-        echo "* $SRC_F -> $OUT_F"
-        rawk_page $SRC_F > $OUT_F
-        rm $SRC_F
+        out_f="$(echo $src_f | sed -e 's/\([[:alnum:]]*\)\.[mM][dD]/\1/').html"
+        echo "* $src_f -> $out_f"
+        rawk_page $src_f > $out_f
+        rm $src_f
     done
 }
 
 # source config file and check valid targets and source dirs
-. ./$CONF_FILE
-START="$(pwd)"
-HDR_TPL="$(pwd)/$HDR_TPL"
-FTR_TPL="$(pwd)/$FTR_TPL"
-STYLESHEET="$(sed -e s\|\${SITE_ROOT}\|$SITE_ROOT\| < $STYLESHEET)"
+. ./$conf_file
+start="$(pwd)"
+hdr_tpl="$(pwd)/$hdr_tpl"
+ftr_tpl="$(pwd)/$ftr_tpl"
+stylesheet="$(sed -e s\|\${site_root}\|$site_root\| < $stylesheet)"
 
 rawk_main $@
 
-cd $START
+cd $start

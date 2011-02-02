@@ -39,10 +39,10 @@ quick start (the way i do it):
 0. create a directory inside that to hold the actual site source, i.e. 
 brokenlcd.  right now, my site directory looks like:
 
-    kyle@sterling [ ~/src ] $ ls
-    brokenlcd.net/
-    kyle@sterling [ ~/src ] $ ls brokenlcd.net/
-    brokenlcd/
+    `kyle@sterling [ ~/src ] $ ls`    
+    `brokenlcd.net/`    
+    `kyle@sterling [ ~/src ] $ ls brokenlcd.net/`    
+    `brokenlcd/`   
 
 0. copy the sample makefile, templates, and rawkrc from 
 $PREFIX/share/rawk/site to your site directory, i.e.:
