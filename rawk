@@ -82,7 +82,7 @@ rawk_page () {
 }
 
 rawk_footer() {
-    echo "$(cat $ftr_tpl | sed -e 's/\${date}/$(date)/')"
+    echo "$(cat $ftr_tpl | sed -e s/\${date}/$(date)/)"
 }
 
 rawk_main () {
