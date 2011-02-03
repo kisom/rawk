@@ -62,17 +62,18 @@ the site).
 0. make && make install
 
 customisations
-* the header template should / can contain the following vars:
-    ${TITLE}        # site title
-    ${SUB\_TITLE}    # site subtitle
-* you can point rawkrc at your own header / footer templates and stylesheet
-in rawkrc
-* you can change the site root to use for links in the variable SITE\_ROOT
-the default is SITE\_ROOT="/" so the root links are `<a href="/index.html">`
-* you are encouraged to tweak the source so it does precisely what you wish
-* setting the variable uname_comment to anything prints your shell and 
-`uname -rms` to the body as a comment
-
+    * the header template should / can contain the following vars:
+        ${title}        # site title
+        ${subtitle}     # site subtitle
+        ${root\_link}    # the site root (use in an href)
+        ${date}         # unix time stamp (i.e. $(date))
+    * you can point rawkrc at your own header / footer templates and stylesheet
+    in rawkrc
+    * you can change the site root to use for links in the variable SITE\_ROOT
+    the default is SITE\_ROOT="/" so the root links are `<a href="/index.html">`
+    * you are encouraged to tweak the source so it does precisely what you wish
+    * setting the variable uname_comment to anything prints the interpreter,
+    `date`, and `uname -rms` to the body as a comment
 
 links
 * $PREFIX/share/rawk/
