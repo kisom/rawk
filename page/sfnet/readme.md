@@ -69,6 +69,9 @@ in rawkrc
 * you can change the site root to use for links in the variable SITE\_ROOT
 the default is SITE\_ROOT="/" so the root links are `<a href="/index.html">`
 * you are encouraged to tweak the source so it does precisely what you wish
+* setting the variable uname_comment to anything prints your shell and 
+`uname -rms` to the body as a comment
+
 
 links
 * $PREFIX/share/rawk/

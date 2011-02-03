@@ -56,11 +56,11 @@ rawk_submenu () {
     file_list="$(echo \"$file_list\" | sort | xargs)"
     for file in $file_list
     do
-        echo  "<a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\"> \c"
-        echo "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/') \c"
-        echo "</a> "
+        printf "<a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\"> "
+        printf "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/') "
+        printf "</a> "
     done
-    echo "</div>"
+     printf "\n</div>\n"
 }
 
 rawk_page () {
@@ -68,6 +68,9 @@ rawk_page () {
     rawk_submenu $1
     
     echo '<div id="main">'
+    if [ -n "$uname_comment" ]; then
+        echo "<!-- shell: $SHELL os: $(uname -rms) -->"
+    fi
     $mdparser $1
     echo '</div>'
 
