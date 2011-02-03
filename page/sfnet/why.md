@@ -18,12 +18,12 @@ ones used in sw.
 
 the goals of rawk are:
 * lynx friendly (i reworked the site menu to look better under lynx)
-* simple code (rawk is currently 99 actual lines of code and 137 total lines)
+* simple code (rawk is currently 85 actual lines of code and 134 total lines)
 * compliant (rawk only uses posix syntax and generates w3c compliant html)
 * customisable (simple code + templates means the user has quite a bit of room
 to customise their site)
 * portability (if i wanted to depend on a particular shell or implementation of
 sed, i would have just written this in perl)
-* build websites like i build code - easily version controlled, automate the
-repetitive tasks to focus on adding content.
+* build websites like i build code (easily version controlled, automate the
+repetitive tasks to focus on adding content)
 
