@@ -20,18 +20,22 @@ usage () {
     #exit 0
 }
 
-rawk_header () {
+# $1->filename $2->template
+rawk_template() {
     page_title="$(echo ${1##*/} | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
     root_link="$(echo ${1%/*} | sed -e "s|^\./||" \
                                   -e "s|[^/]*|..|")"
 
     # sedden death
-    hdr=$(cat ${hdr_tpl} | sed -e "s|\${title}|$site_title|g"          \
-                               -e "s|\${subtitle}|$site_subtitle|"     \
-		               -e "s|\${site_root}|$site_root|"        \
-                               -e "s|\${root_link}|$root_link/|"    
+    rawk_tpl=$(cat $2 | sed -e "s|\${title}|$site_title|g"          \
+                            -e "s|\${subtitle}|$site_subtitle|"     \
+		            -e "s|\${site_root}|$site_root|"        \
+                            -e "s|\${date}|$(date)|"                \
+                            -e "s|\${root_link}|$root_link/|"    
     )
-    echo "$hdr"
+    echo "$rawk_tpl"
+
+
 }
 
 rawk_submenu () {
@@ -56,15 +60,16 @@ rawk_submenu () {
     file_list="$(echo \"$file_list\" | sort | xargs)"
     for file in $file_list
     do
-        printf "<a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\"> "
+        printf "\n <a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\"> "
         printf "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/') "
-        printf "</a> "
+        printf "</a>"
     done
      printf "\n</div>\n"
 }
 
 rawk_page () {
-    rawk_header $1
+    #rawk_header $1
+    rawk_template $1 $hdr_tpl
     rawk_submenu $1
     
     echo '<div id="main">'
@@ -78,12 +83,8 @@ rawk_page () {
     $mdparser $1
     echo '</div>'
 
-    rawk_footer $1
-}
-
-rawk_footer() {
-    ftr=$(cat $ftr_tpl | sed -e "s/\${date}/$(date)/")
-    echo "$ftr"
+    #rawk_footer $1
+    rawk_template $1 $ftr_tpl
 }
 
 rawk_main () {
