@@ -29,7 +29,7 @@ rawk_header () {
     hdr=$(cat ${hdr_tpl} | sed -e "s|\${title}|$site_title|g"          \
                                -e "s|\${subtitle}|$site_subtitle|"     \
 		               -e "s|\${site_root}|$site_root|"        \
-                               -e "s|\${root_link}|$root_link/|"
+                               -e "s|\${root_link}|$root_link/|"    
     )
     echo "$hdr"
 }
@@ -82,7 +82,7 @@ rawk_page () {
 }
 
 rawk_footer() {
-    echo "$(cat $ftr_tpl)"
+    echo "$(cat $ftr_tpl | sed -e 's/\${date}/$(date)/')"
 }
 
 rawk_main () {
