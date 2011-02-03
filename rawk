@@ -69,7 +69,9 @@ rawk_page () {
     
     echo '<div id="main">'
     if [ -n "$uname_comment" ]; then
-        echo "<!-- shell: $SHELL os: $(uname -rms) -->"
+        printf "<!-- "
+        printf "shell: $(head -1 $0 | sed -e 's/^#!\([/[[:alnum:]]]*\)/\1/')"
+        printf "\tos: $(uname -rms) -->"
     fi
     $mdparser $1
     echo '</div>'
