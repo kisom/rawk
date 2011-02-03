@@ -22,6 +22,7 @@ installation
 0. make 
 0. optionally, make PREFIX=<path to install to>
     by default PREFIX is /usr/local
+0. install a markdown parser if one isn't installed
 
 quick notes:
 * rawk looks for rawkrc in the current directory

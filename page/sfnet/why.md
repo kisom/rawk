@@ -24,6 +24,6 @@ the goals of rawk are:
 to customise their site)
 * portability (if i wanted to depend on a particular shell or implementation of
 sed, i would have just written this in perl)
-* build websites like i build code - easily version controlled, automate the
-repetitive tasks to focus on adding content.
+* build websites like i build code (easily version controlled, automate the
+repetitive tasks to focus on adding content)
 
