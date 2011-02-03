@@ -35,7 +35,6 @@ rawk_template() {
     )
     echo "$rawk_tpl"
 
-
 }
 
 rawk_submenu () {
