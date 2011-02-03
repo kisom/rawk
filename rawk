@@ -69,11 +69,11 @@ rawk_page () {
     
     echo '<div id="main">'
     if [ -n "$uname_comment" ]; then
-        printf "<!-- page build stats: -->"
+        printf "\n<!-- page build stats: -->\n"
         printf "<!-- "
         printf "shell: $(head -1 $0 | sed -e 's/^#!\([/[[:alnum:]]]*\)/\1/')"
-        printf "<!-- generated on $(date) -->"
-        printf "\tos: $(uname -rms) -->"
+        printf "\tos: $(uname -rms) -->\n"
+        printf "<!-- generated on $(date) -->\n\n"
     fi
     $mdparser $1
     echo '</div>'
