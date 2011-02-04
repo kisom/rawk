@@ -8,3 +8,4 @@
 [how is rawk licensed?](./how.html)   
      
 [view the rawk README](./readme.html)    
+[there is a quick rawk tutorial](./tutorial.html)

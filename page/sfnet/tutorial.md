@@ -23,7 +23,7 @@ name, i.e. rawk.brokenlcd.net. for the same of this document, we'll call this
 directory $project. now cd $project. 
 
 2. create a directory in $project to contain the site src. we'll call this 
-$site. for example, mkdir rawk_site. you can add a quick $site/index.md to 
+$site. for example, mkdir rawk\_site. you can add a quick $site/index.md to 
 test the site: `echo it works > $site/index.md`. 
 
 3. copy over the skeleton files: `cp -r /usr/local/share/rawk/site/* .`
@@ -35,12 +35,12 @@ step 2: initial configuration
 1. edit the Makefile:
 
 * changing SITE to contain the folder $site. for this site
-it would be SITE=rawk_site.
+it would be SITE=rawk\_site.
 
 * change RHOST to point to where you will upload the site to. it will be 
 similar to the line in the makefile. *make sure you have a trailing slash!*
 
-2. edit rawkrc. for now, you just have to edit site_title and site_subtitle.
+    2. edit rawkrc. for now, you just have to edit site\_title and site\_subtitle.
 
 step 3: set up version control
 ------------------------------
