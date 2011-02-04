@@ -23,14 +23,13 @@ usage () {
 # $1->filename $2->template
 rawk_template() {
     page_title="$(echo ${1##*/} | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
-    root_link="$(echo ${1%/*}   | sed -e 's|^\./||'                 \
-                                      -e 's|[^/][^/]*|..|g' )"      
+
     # sedden death
     rawk_tpl=$(cat $2 | sed -e "s|\${title}|$site_title|g"          \
                             -e "s|\${subtitle}|$site_subtitle|"     \
 		            -e "s|\${site_root}|$site_root|"        \
                             -e "s|\${date}|$(date)|"                \
-                            -e "s|\${root_link}|$root_link|"    
+                            -e "s|\${root_link}|${site_root}index.html|"    
     )
     echo "$rawk_tpl"
 
