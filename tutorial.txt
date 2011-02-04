@@ -1,0 +1,37 @@
+brokenlcd's guide to setting up sites with rawk
+===============================================
+
+*this is not the only way to do this, it's just how i do it.*
+
+step 0: pre-requisites
+----------------------
+1. you need a markdown parser installed. see the readme for the link for smu,
+the markdown parser i use.
+
+2. rawk should be installed to your system path. for the sake of this tutorial,
+we'll assume that rawk is installed in /usr/local (i.e. the script is at 
+/usr/local/bin/rawk). this should be done with the include makefile, which will
+copy over site templates.
+
+step 1: preparing the site
+--------------------------
+
+1. first you should create a project directory. i name mine with the domain
+name, i.e. rawk.brokenlcd.net. for the same of this document, we'll call this
+directory $project. now cd $project. 
+
+2. create a directory in $project to contain the site src. we'll call this 
+$site. for example, mkdir rawk_site. you can add a quick $site/index.md to 
+test the site: `echo it works > $site/index.md`. 
+
+3. copy over the skeleton files: `cp -r /usr/local/share/rawk/site/* .`
+these files should be in $project. in $project/ you should have $site,
+Makefile, rawkrc, and templates. in this example, 
+
+step 2: initial configuration
+-----------------------------
+
+1. edit the Makefile, changing SITE to contain the folder $site. for this site
+it would be SITE=rawk_site.
+
+2. change RHOST to point to where you will upload the site to.
