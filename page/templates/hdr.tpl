@@ -2,7 +2,6 @@
 <html>
 <head>
 <title>${title}</title>
-<link rel="icon" href="/favicon.png" type="image/png">
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${site_root}styles/style.css">
 </head>
