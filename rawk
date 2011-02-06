@@ -37,7 +37,6 @@ rawk_template() {
 rawk_submenu() {
     fbase="$(echo ${1##*/} | sed -e 's|\(.*\)\..[[:alnum:]]*|\1|')"
     fc="| grep -ve '^$(echo $fbase)\..*\$'"   
-    echo "$fc" >&2
     file_list=""
 
     # add cwd
