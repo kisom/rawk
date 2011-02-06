@@ -86,5 +86,5 @@ not on a framework.
 
 if you run across bugs, would like to contribute patches back, or have ideas
 for improvement, you can check out the sourcefourge page in the links section
-of "where can i get rawk".
+of [where can i get rawk](where.html).
 

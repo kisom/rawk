@@ -15,7 +15,7 @@
 conf_file="rawkrc"
 site_root="/"
 
-usage () {
+usage() {
     echo "usage: $0 <source dir>"
     #exit 0
 }
@@ -32,10 +32,9 @@ rawk_template() {
                             -e "s|\${root_link}|${site_root}index.html|"    
     )
     echo "$rawk_tpl"
-
 }
 
-rawk_submenu () {
+rawk_submenu() {
     fc="| grep -ve '^$(echo ${1##*/})\$'"   # filter chain
     file_list=""
 
@@ -64,8 +63,7 @@ rawk_submenu () {
      printf "\n</div>\n"
 }
 
-rawk_page () {
-    #rawk_header $1
+rawk_page() {
     rawk_template $1 $hdr_tpl
     rawk_submenu $1
     
@@ -80,7 +78,6 @@ rawk_page () {
     $mdparser $1
     echo '</div>'
 
-    #rawk_footer $1
     rawk_template $1 $ftr_tpl
 }
 
@@ -89,9 +86,7 @@ rawk_main () {
     # if we got any, rename them for clarity
     if [ -n "$1" ]; then
         src_dir="$1"
-    fi
-
-    if [ -n "$2" ]; then 
+    elif [ -n "$2" ]; then 
         target="$2"
     fi
 
@@ -128,13 +123,14 @@ rawk_main () {
     done
 }
 
+# main()
 # source config file and check valid targets and source dirs
 . ./$conf_file
-start="$(pwd)"
 hdr_tpl="$(pwd)/$hdr_tpl"
 ftr_tpl="$(pwd)/$ftr_tpl"
 stylesheet="$(sed -e s\|\${site_root}\|$site_root\| < $stylesheet)"
 
 rawk_main $@
 
-cd $start
+# fin
+

@@ -9,7 +9,7 @@ is less restrictive in your locale - pick whichever license you wish.
 
 this software is released into the public domain.
 
-> ============ THE ISC LICENSE =================================================
+> ============ THE ISC LICENSE =================================================     
 > Copyright (c) 2011, Kyle Isom &lt;coder@kyleisom.net&gt;
 > 
 > Permission to use, copy, modify, and/or distribute this software for any
