@@ -3,6 +3,8 @@
 # 	- Kyle Isom <coder@kyleisom.net>
 
 # directory containing site source
+# ours is named sfnet because it was originally going to be the sourceforge
+# page. 
 SITE=sfnet
 
 # ensure RHOST has a trailing slash!
