@@ -96,7 +96,7 @@ rawk_main () {
         usage
     elif [ -z "${target}" ]; then
         # sane default
-        target="$(pwd)/$(basename ${src_dir}).build"
+        target="$(pwd)/${src_dir##*/}.build"
     fi
 
     if [ ! -d "${target}" ]; then
@@ -129,7 +129,7 @@ rawk_main () {
 . ./$conf_file
 hdr_tpl="$(pwd)/$hdr_tpl"
 ftr_tpl="$(pwd)/$ftr_tpl"
-stylesheet="$(sed -e s\|\${site_root}\|$site_root\| < $stylesheet)"
+stylesheet="$(cat $stylesheet)"
 
 rawk_main $@
 
