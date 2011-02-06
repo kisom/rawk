@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+<title>.:[ rawk ]:.</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/styles/style.css">
+</head>
+<body>
+<div class="header">
+<h1 class="headerTitle">
+<a href="/index.html">.:[ rawk ]:.</a> 
+<span class="headerSubtitle">rage against web frameworks</span>
+</h1>
+</div>
+<div id="side-bar">
+<a href="index.html">.</a> 
+
+ <a href="how.html"> how </a>
+ <a href="tutorial.html"> tutorial </a>
+ <a href="what.html"> what </a>
+ <a href="where.html"> where </a>
+ <a href="who.html"> who </a>
+ <a href="why.html"> why </a>
+</div>
+<div id="main">
+
+<!-- page build stats: -->
+<!-- shell: /bin/sh	os: Linux 2.6.35-25-generic i686 -->
+<!-- generated on Sat Feb  5 20:52:41 MST 2011 -->
+
+<pre><code>                                         _                   
+            _      _ __  __ _ __      __| | __     _         
+           (_)    | '__|/ _` |\ \ /\ / /| |/ /    (_)             
+         _  _     | |  | (_| | \ V  V / |   &lt;      _  _ 
+        (_)(_)    |_|   \__,_|  \_/\_/  |_|\_\    (_)(_)
+                                                                  </code></pre>
+<p>
+.:[ rage against web frameworks! ]:.</p>
+<p>
+rawk: a markdown-based web framework using only unix commandline tools  <br />  
+license: public domain and isc dual-license</p>
+<p>
+design goals:
+<ol>
+<li>simplicity: very customisable but works nearly straight out of the box</li>
+<li>posix-compliant tools: uses only strict posix compliant syntax for the 
+unix command line tools it uses (i.e. sh and sed)</li>
+<li>no gui required</li>
+<li>lynx-friendly</li>
+</ol>
+</p>
+<p>
+installation
+<ol>
+<li>make </li>
+<li>optionally, make PREFIX=<path to install to>
+ by default PREFIX is /usr/local</li>
+<li>install a markdown parser if one isn't installed</li>
+</ol>
+</p>
+<p>
+quick notes:
+<ul>
+<li>rawk looks for rawkrc in the current directory</li>
+<li>rawk expects at a minimum a path to a tree of markdown files</li>
+<li>rawk also looks for a second argument which is the output directory</li>
+<li>if no output directory rawk will use $PWD/$(basename $1).build</li>
+<li>by default rawk looks for smu; feel free to switch out your markdown parser.
+smu can be obtained from its <a href="http://s01.de/~tox/index.cgi/proj_smu">homepage</a>
+or by clicking the link at the bottom right of the page.</li>
+<li>rawk identifies markdown files by the extension .md</li>
+</ul>
+</p>
+<p>
+quick start (the way i do it):</p>
+<ol>
+<li><p>
+create a directory for your site, ex. brokenlcd.net</p>
+</li>
+<li><p>
+create a directory inside that to hold the actual site source, i.e. 
+brokenlcd.  right now, my site directory looks like:</p>
+<p>
+ <code>kyle@sterling [ ~/src ] $ ls</code>  <br />  
+ <code>brokenlcd.net/</code>  <br />  
+ <code>kyle@sterling [ ~/src ] $ ls brokenlcd.net/</code>  <br />  
+ <code>brokenlcd/</code> <br />  </p>
+</li>
+<li><p>
+copy the sample makefile, templates, and rawkrc from 
+$PREFIX/share/rawk/site to your site directory, i.e.:</p>
+<p>
+ <code>kyle@sterling [ ~/src ] $ ls brokenlcd.net/</code> <br />  
+ <code>brokenlcd/  templates/      Makefile    rawkrc</code></p>
+</li>
+<li><p>
+edit rawkrc, changing SITE_TITLE and SITE_SUBTITLE to match your site. 
+you want to use a different markdown interpreter, set MDPARSER 
+appropriately. </p>
+</li>
+<li><p>
+edit the Makefile to rename the SITE and rsync details (for uploading
+the site).</p>
+</li>
+<li><p>
+make &amp;&amp; make install</p>
+</li>
+</ol>
+<p>
+customisations
+<pre><code> * the header template should / can contain the following vars:
+     ${title}        # site title
+     ${subtitle}     # site subtitle
+     ${root\_link}    # the site root (use in an href)
+     ${date}         # unix time stamp (i.e. $(date))
+ * you can point rawkrc at your own header / footer templates and stylesheet
+ in rawkrc
+ * you can change the site root to use for links in the variable SITE\_ROOT
+ the default is SITE\_ROOT=&quot;/&quot; so the root links are `&lt;a href=&quot;/index.html&quot;&gt;`
+ * you are encouraged to tweak the source so it does precisely what you wish
+ * setting the variable uname_comment to anything prints the interpreter,
+ `date`, and `uname -rms` to the body as a comment</code></pre>
+</p>
+<p>
+links
+<ul>
+<li>$PREFIX/share/rawk/</li>
+<li><a href="http://www.network-science.de/ascii/">ASCII art generator</a></li>
+</ul>
+</p>
+</div>
+<div id="footer">
+<div class="left">site generated on Sat Feb  5 20:52:41 MST 2011</div>
+<div class="right">powered by 
+<a href="http://rawk.brokenlcd.net/">rawk</a>.</div>
+</div>
+</body>
+</html>

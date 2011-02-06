@@ -5,10 +5,11 @@ site_title=".:[ rawk ]:."
 site_subtitle="rage against web frameworks"
 stylesheet="templates/style.css"
 
-# blacklist definition
-bl="$bl ^index\..*$"            # don't link to index
+# blacklist definition - in the form of grep regex
+bl="$bl ^index\..*$"            # don't link to index files
 bl="$bl ^images$"               # don't link to image dir
 bl="$bl ^keys$"                 # don't link to keys dir
 bl="$bl ^files$"                # don't link to files dir
 bl="$bl ^styles$"               # don't link to styles dir
 bl="$bl ^restrict$ ^private$"   # don't link to private files
+

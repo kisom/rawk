@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- html template originally from sw. slightly modified for rawk. -->
 <html>
 <head>
 <title>${title}</title>

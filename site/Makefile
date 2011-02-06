@@ -1,4 +1,4 @@
-# site-tools Makefile to build and push a site built using smu and sw.
+# build and push a site using rawk
 # usage: edit SITE and RHOST
 # 	- Kyle Isom <coder@kyleisom.net>
 
@@ -29,7 +29,7 @@ target-list:
 	@echo "valid targets:"
 	@echo "	site:  	 build site and push it "
 	@echo " install: rsync site to RHOST"
-	@echo " clean:   remove \$(SITE).static"
+	@echo " clean:   remove \$(SITE).build"
 	@echo " "
 
 

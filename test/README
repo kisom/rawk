@@ -5,7 +5,7 @@ to debug rawk and to make sure that it generates everything properly.
 in short, this directory is the test suite for rawk. after installing rawk, you
 should be able to run 'make' and verify that the site was generated. note that
 due to the way rawk generates the code, it will need to be installed on the
-site for stylesheets and links to work.
+site for stylesheets and some links to work.
 
 - kyle isom
 

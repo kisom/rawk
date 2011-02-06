@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<title>.:[ rawk ]:.</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/styles/style.css">
+</head>
+<body>
+<div class="header">
+<h1 class="headerTitle">
+<a href="/index.html">.:[ rawk ]:.</a> 
+<span class="headerSubtitle">rage against web frameworks</span>
+</h1>
+</div>
+<div id="side-bar">
+<a href="index.html">.</a> 
+
+ <a href="how.html"> how </a>
+ <a href="readme.html"> readme </a>
+ <a href="tutorial.html"> tutorial </a>
+ <a href="where.html"> where </a>
+ <a href="who.html"> who </a>
+ <a href="why.html"> why </a>
+</div>
+<div id="main">
+
+<!-- page build stats: -->
+<!-- shell: /bin/sh	os: Linux 2.6.35-25-generic i686 -->
+<!-- generated on Sat Feb  5 20:52:40 MST 2011 -->
+
+<h1>what is rawk?</h1>
+<p>
+rawk is a static site generator written in the bourne shell. it uses posix
+compliant syntax to support the maximum number of systems and requires only
+a markdown parser and the standard unix tools (grep and sed in particular).</p>
+<p>
+for example, this entire site consists of a tree of markdown files converted
+by rawk to static html via a makefile. to see the source this was generated
+from, take a look at <a href="https://github.com/kisom/rawk/tree/master/page">the github repo</a>.
+this site uses smu (see below) as the markdown processor.</p>
+<p>
+rawk should be fed a tree containing markdown files and any other components
+to the site. it will copy that tree over to a build directory and convert
+all markdown files to full pages to create a site with consistent headers,
+footers, and a context menu of sorts.</p>
+<p>
+rawk has been verified on the following systems:
+<ul>
+<li>linux</li>
+<li>openbsd</li>
+<li>os x   </li>
+</ul>
+</p>
+<p>
+it is important to note that you need a markdown parser. i deliberately
+left the selection up to the user. if you need one, i would suggest 
+<a href="http://s01.de/~tox/index.cgi/proj_smu">smu</a> - it is what i use for all my
+sites.</p>
+<p>
+actually, an interesting note is that rawk doesn't actually care if you use
+markdown or not - as long as whatever you have produces html output suitable
+for use as the body of the page. this means you could write all your code in
+html (as the body, or modify the header template appropriately) and use
+cat as your parser. if you're not using markdown, you should probably change
+the extensions in the rawk script.</p>
+</div>
+<div id="footer">
+<div class="left">site generated on Sat Feb  5 20:52:40 MST 2011</div>
+<div class="right">powered by 
+<a href="http://rawk.brokenlcd.net/">rawk</a>.</div>
+</div>
+</body>
+</html>

@@ -4,7 +4,8 @@ ftr_tpl="templates/ftr.tpl"
 site_title=".:[ rawk ]:."
 site_subtitle="rage against web frameworks"
 stylesheet="templates/style.css"
-uname_comment="true"
+uname_comment="true"            # display build stats as comments in the page 
+                                # source
 
 # blacklist definition
 bl="$bl ^index\..*$"            # don't link to index

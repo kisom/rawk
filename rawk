@@ -35,7 +35,9 @@ rawk_template() {
 }
 
 rawk_submenu() {
-    fc="| grep -ve '^$(echo ${1##*/})\$'"   # filter chain
+    fbase="$(echo ${1##*/} | sed -e 's|\(.*\)\..[[:alnum:]]*|\1|')"
+    fc="| grep -ve '^$(echo $fbase)\..*\$'"   
+    echo "$fc" >&2
     file_list=""
 
     # add cwd
@@ -54,6 +56,7 @@ rawk_submenu() {
     
     file_list="$(eval ls -1 $(echo ${1%/*}) $fc | sed -e 's/\.md\([ ]*\)/\.html\1/g' | uniq)"
     file_list="$(echo \"$file_list\" | sort | xargs)"
+    echo $file_list >&2
     for file in $file_list
     do
         printf "\n <a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\"> "
