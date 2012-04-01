@@ -7,7 +7,7 @@ SITE=site
 
 # ensure RHOST has a trailing slash!
 #     e.g. foo@spam:baz/
-RHOST=user@example.net:/var/www/site/htdocs/
+RHOST=rawk.brokenlcd.net:sites/rawk-site/
 
 TARGET="$(PWD)/$(SITE)"
 
