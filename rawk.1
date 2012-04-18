@@ -1,0 +1,86 @@
+.Dd $Mdocdate$
+.Dt RAWK 1 
+.Os
+.Sh NAME
+.Nm rawk 
+.Nd static site generator
+.Sh SYNOPSIS
+.Nm 
+target
+.Sh DESCRIPTION
+.Nm
+is a static site generator written in the bourne shell. it uses POSIX compliant
+syntax to support the maximum number of systems and requires only a markdown 
+parser and the standard unix tools (grep and sed in particular).
+
+.Nm requires a configuration file called rawkrc to be present in the working
+directory. See 
+.Xr rawkrc 5 
+for the syntax.
+
+To use
+.Nm ,
+specify a directory containing the site source. Alternatively, use the
+included site templates and Makefile to simplify setting up a site. See the
+.Sx FILES
+section for more.
+
+.Sh FILES
+.Bl -tag -width .Ds
+.It Pa /usr/local/share/rawk/README
+Additional documentation.
+.It Pa /usr/local/share/rawk/site/rawkrc 
+Sample rawkrc
+.It Pa /usr/local/share/rawk/site/Makefile 
+Sample Makefile
+.It Pa /usr/local/share/rawk/site/templates/
+Sample templates for new projects
+.El
+.Sh SEE ALSO
+.Xr rawkrc 5
+
+More information is available on the 
+.Lk http://rawk.brokenlcd.net "rawk website"
+and at
+.Lk http://tyrfingr.errno61.net.
+.Sh HISTORY
+.Xr rawk 1 
+was born out of a frustration in building simple sites that did not need 
+to change often and did not need to serve dynamic content. the author felt that
+it being the 21st century, we should have a better way to quickly do this.
+
+the author originally came across the suckless webframework (and smu, 
+coincidentally) which worked for a small site i wanted to build. when used for
+a larger site, it struggled building it. having seen it was possible to do what 
+was needed, rawk was written.
+
+a lot of credit goes to sw, as this was very much inspired by and a direct 
+result of the initial encounter with sw. in fact, rawk's templates are based on
+the ones used in sw.
+
+the goals of rawk are:
+.Bl -bullet -width Ds
+.It
+lynx friendly (i reworked the site menu to look better under lynx)
+.It
+simple code (rawk is less than 100 actual lines of code and less than 150 total
+lines)
+.It
+compliant (rawk only uses posix syntax and generates w3c compliant html)
+.It
+customisable (simple code + templates means the user has quite a bit of room to
+customise their site)
+.It
+portability (if i wanted to depend on a particular shell or implementation of 
+sed, i would have just written this in perl)
+.It
+build websites like i build code (easily version controlled, automate the 
+repetitive tasks to focus on adding content)
+.El
+.Sh AUTHORS
+.Xr rawk 1
+was written by
+.An Kyle Isom ,
+.Mt coder@kyleisom.net .
+.Sh LICENSE
+Released under a Public Domain and ISC dual license.

@@ -1,0 +1,66 @@
+.Dd $Mdocdate$
+.Dt RAWKRC 5
+.Os
+.Sh NAME
+.Nm rawkrc
+.Nd configuration file for 
+.Xr rawk 1
+.Sh SYNOPSIS
+rawkrc
+.Sh DESCRIPTION
+.Xr rawk 1
+reads configuration data from a file
+.Nm
+in the current working directory. It contains key=value pairs, one per line,
+that a sourced into the script when it runs. The currently supported variables
+are:
+
+.Bl -tag -width Ds
+.It mdparser
+The markdown parser to use. Note that markdown here is a convention, as 
+.Xr rawk 1
+was originally intended to build sites from markdown files. In general, this
+can be any processor that transforms source files into the desired html output.
+Any binary that can be reached by the user's PATH can be used here.
+.It hdr_tpl
+.It ftr_tpl
+Points to the header and footer templates to use when generating site files.
+.Xr rawk 1
+uses these templates, places them before and after (respectively) the output
+of the mdparser option. Valid variables are ${title}, ${subtitle}, 
+${root_link}, and ${date}. The title and subtitle variables are replaced with
+the values specified in this configuration file, root_link is substituted with
+a link to the top of the site, and ${date} is substituted with the output of
+the
+.Xr date 1
+command. The convention for stylesheets in the header is to link to 
+${site_root}/styles/style.css. 
+.It site_title
+The name of the site, used in generating the header.
+.It site_subtitle
+The subtitle of the site. May be omitted.
+.It stylesheet
+Points to the stylesheet to link to each page. This is substituted in the
+header template.
+.It bl
+This is a blacklist variable. This is a list of items that will be passed for
+grep when building the site menu. Anything matched by the blacklist will not
+be included in the top menu.
+.It uname_comment
+If this is set, a comment is put in each page with the date, interpreter, and
+the output of `uname -rms`.
+.It SITE_ROOT
+This is set by default in the script, but may be overridden if a different
+site root besides the default "/" is desired.
+.Sh FILES
+.Bl -tag -width Ds
+.It Pa /usr/local/share/rawk/site/rawkrc
+Example rawkrc.
+.El
+.Sh AUTHORS
+.Xr rawk 1
+was written by
+.An Kyle Isom ,
+.Mt coder@kyleisom.net .
+Documentation is available at 
+.Lk http://rawk.brokenlcd.net .
