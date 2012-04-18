@@ -1,4 +1,4 @@
-mdparser=smu
+mdparser=cat
 hdr_tpl="templates/hdr.tpl"
 ftr_tpl="templates/ftr.tpl"
 site_title=".:[ rawk ]:."
