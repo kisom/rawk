@@ -33,4 +33,8 @@ htmldoc:
 	-mandoc -Thtml rawk.1 > rawk.1.html
 	-mandoc -Thtml rawkrc.5 > rawkrc.5.html
 
+clean:
+	-rm -rf $(TARGET)-$(VERSION)*
+	-cd test && make clean
+
 .PHONY: all remove
