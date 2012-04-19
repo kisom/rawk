@@ -1,7 +1,8 @@
 PREFIX := /usr/local
 GROUP := bin
 TARGET := rawk
-VERSION := 1.2.3
+VERSION := 1.2.4
+MANDIR := $(PREFIX)/man
 
 all: install
 
@@ -12,10 +13,10 @@ install:
 	install -o $(USER) -g $(GROUP) ./README $(PREFIX)/share/rawk
 	find $(PREFIX)/share/rawk/ -type f -exec chmod 644 '{}' \;
 	find $(PREFIX)/share/rawk/ -type d -exec chmod 755 '{}' \;
-	install -m 0755 -d $(PREFIX)/share/man/man1
-	install -m 0755 -d $(PREFIX)/share/man/man5
-	install -o $(USER) -g $(GROUP) -m 0444 rawk.1 $(PREFIX)/share/man/man1/
-	install -o $(USER) -g $(GROUP) -m 0444 rawkrc.5 $(PREFIX)/share/man/man5/
+	install -m 0755 -d $(MANDIR)/man1
+	install -m 0755 -d $(MANDIR)/man5
+	install -o $(USER) -g $(GROUP) -m 0444 rawk.1 $(MANDIR)/man1/
+	install -o $(USER) -g $(GROUP) -m 0444 rawkrc.5 $(MANDIR)/man5/
 
 remove:
 	rm -f  $(PREFIX)/bin/rawk
