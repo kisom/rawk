@@ -19,10 +19,9 @@ unix command line tools it uses (i.e. sh and sed)
 0. lynx-friendly
 
 installation
+0. ./config.sh or PREFIX=${HOME} ./config.sh
 0. make 
-0. optionally, make PREFIX=<path to install to>
-    by default PREFIX is /usr/local
-0. install a markdown parser if one isn't installed
+0. make sure a markdown parser is installed / available
 
 quick notes:
 * rawk looks for rawkrc in the current directory

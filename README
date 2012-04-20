@@ -20,9 +20,8 @@ design goals:
 
 
 installation
-    1. make 
-    2. optionally, make PREFIX=<path to install to>
-    by default PREFIX is /usr/local
+    1. ./config.sh or PREFIX=${HOME} ./config.sh
+    2. make 
     3. make sure a markdown parser is installed / available
 
 quick notes:

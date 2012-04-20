@@ -9,7 +9,7 @@ SITE=sfnet
 
 # ensure RHOST has a trailing slash!
 #     e.g. foo@spam:baz/
-RHOST=kisom@brokenlcd.net:rawk-site/
+RHOST=brokenlcd.net:sites/rawk-site/
 
 TARGET="$(PWD)/$(SITE)"
 

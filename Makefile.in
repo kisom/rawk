@@ -1,8 +1,8 @@
-PREFIX := /usr/local
+PREFIX := $PREFIX
 GROUP := bin
 TARGET := rawk
-VERSION := 1.2.4
-MANDIR := $(PREFIX)/man
+VERSION := 1.2.5
+MANDIR := $MANDIR
 
 all: install
 
