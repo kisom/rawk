@@ -38,4 +38,7 @@ clean:
 	-rm -rf $(TARGET)-$(VERSION)*
 	-cd test && make clean
 
-.PHONY: all remove
+distclean: clean
+	-rm -f Makefile
+
+.PHONY: all remove clean distclean dist
