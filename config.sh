@@ -2,6 +2,7 @@
 
 TARGET="$(cat Makefile.in | grep 'TARGET :=' | awk -F' ' '{ print $3; }')"
 echo "configuring ${TARGET}"
+OPSYS="$(uname -s)"
 
 which sed 2>/dev/null 1>/dev/null
 if [ $? -ne 0 ]; then
