@@ -5,7 +5,7 @@ VERSION := 1.2.7
 MANDIR := $MANDIR
 
 all: 
-	echo "use 'make install' to install $(TARGET)"
+	@echo "use 'make install' to install $(TARGET)"
 
 install:
 	install -o $(USER) -g $(GROUP) ./$(TARGET) $(PREFIX)/bin/rawk
