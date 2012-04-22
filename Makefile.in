@@ -1,7 +1,7 @@
 PREFIX := $PREFIX
 GROUP := bin
 TARGET := rawk
-VERSION := 1.2.7
+VERSION := 1.2.8
 MANDIR := $MANDIR
 
 all: 
