@@ -27,11 +27,19 @@ install:
 clean:
 	rm -rf $(SITE).build
 
+buildclean:
+	rm -rf $(SITE).build/*
+	find . -iname .\*.\* -exec rm {} \;
+
+deploy: buildclean site install
+
 target-list:
 	@echo "valid targets:"
 	@echo "	site:  	 build site and push it "
 	@echo " install: rsync site to RHOST"
 	@echo " clean:   remove \$(SITE).static"
+	@echo " buildclean: remove .*.* (i.e. editor swap files) from site/"
+	@echo " deploy: buildclean, site, install shortcut"
 	@echo " "
 
 
