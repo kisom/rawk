@@ -9,3 +9,7 @@
      
 [view the rawk README](./readme.html)    
 [there is a quick rawk tutorial](./tutorial.html)
+
+example sites:
+* [unix code portfolio](http://www.tyrfingr.is)
+* [brokenlcd](http://www.brokenlcd.net)
