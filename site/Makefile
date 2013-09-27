@@ -33,5 +33,5 @@ target-list:
 	@echo " "
 
 
-.PHONY: all clean site 
+.PHONY: all clean site install target-list
 
