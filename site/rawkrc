@@ -4,12 +4,13 @@ ftr_tpl="templates/ftr.tpl"
 site_title=".:[ rawk ]:."
 site_subtitle="rage against web frameworks"
 stylesheet="templates/style.css"
+uname_comment=""                # display build stats as comments in the page 
+                                # source
 
-# blacklist definition - in the form of grep regex
-bl="$bl ^index\..*$"            # don't link to index files
+# blacklist definition
+bl="$bl ^index\..*$"            # don't link to index
 bl="$bl ^images$"               # don't link to image dir
 bl="$bl ^keys$"                 # don't link to keys dir
 bl="$bl ^files$"                # don't link to files dir
 bl="$bl ^styles$"               # don't link to styles dir
 bl="$bl ^restrict$ ^private$"   # don't link to private files
-
