@@ -58,10 +58,15 @@ rawk_submenu() {
     file_list="$(echo \"$file_list\" | sort | xargs)"
     for file in $file_list
     do
-        printf "\n <a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\">"
+        if echo $file | grep -q '.link$'; then
+            printf "\n <a href=\"$(cat ${1%/*}/$file)\">"
+        else
+            printf "\n <a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\">"
+        fi
         printf "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/')"
         printf "</a> "
     done
+
     printf "\n</div>\n"
 }
 
@@ -121,6 +126,13 @@ rawk_main () {
         out_f="$(echo $src_f | sed -e 's/\([[:alnum:]]*\)\.[mM][dD]/\1/').html"
         echo "* $src_f -> $out_f"
         rawk_page $src_f > $out_f
+        rm $src_f
+    done
+
+    # don't convert external links
+    # just delete them from the build directory
+    for src_f in $(find . -iname \*.link -print | xargs)
+    do
         rm $src_f
     done
 }
