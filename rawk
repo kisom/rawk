@@ -62,7 +62,7 @@ rawk_submenu() {
         printf "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/')"
         printf "</a> "
     done
-     printf "\n</div>\n"
+    printf "\n</div>\n"
 }
 
 rawk_page() {
