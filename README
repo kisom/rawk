@@ -24,6 +24,9 @@ installation
     2. make 
     3. make sure a markdown parser is installed / available
 
+    alternatively, on debian systems, install the packages from
+    https://apt.kyleisom.net/.
+
 quick notes:
     * rawk looks for rawkrc in the current directory
     * rawk expects at a minimum a path to a tree of markdown files

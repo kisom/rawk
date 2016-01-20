@@ -1,0 +1,18 @@
+Source: rawk
+Section: utils
+Priority: optional
+Maintainer: Kyle Isom <kyle@imap.cc>
+Build-Depends: debhelper (>= 9)
+Recommends: pandoc
+Standards-Version: 3.9.5
+Homepage: https://git.kyleisom.net/util/rawk
+Vcs-Git: https://git.kyleisom.net/util/rawk
+Vcs-Browser: https://git.kyleisom.net/util/rawk
+
+Package: rawk
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: rage against web frameworks
+ rawk is a static site generator that uses only commandline tools by default,
+ along with pandoc (but this isn't strictly necessary) for processing.
+

@@ -1,3 +1,21 @@
+1.3.3: 2016-01-19
+
+Add Debian packaging.
+
+-----------------
+
+
+1.3.2: 2015-09-28
+
+Merge pull request from Scarletts:
+
++ allow $page_title to be used in templates
++ fix whitespace
++ minor style nits
+
+-----------------
+
+
 1.3.1: 2015-09-09
 
 Tweak documentation site links.

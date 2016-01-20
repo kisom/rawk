@@ -1,23 +1,24 @@
-PREFIX := $PREFIX
-GROUP := bin
-TARGET := rawk
-VERSION := 1.3.1
-MANDIR := $MANDIR
+PREFIX ?=	$(DESTDIR)
+PREFIX ?=	$PREFIX
+TARGET :=	rawk
+VERSION :=	1.3.3
+MANDIR :=	$(PREFIX)/share/man/man1
 
 all: 
 	@echo "use 'make install' to install $(TARGET)"
 
 install:
-	install -o $(USER) -g $(GROUP) ./$(TARGET) $(PREFIX)/bin/rawk
-	mkdir -p $(PREFIX)/share/$(TARGET)/
+	install -d -m 0755 $(PREFIX)/bin
+	install -m 0755 ./$(TARGET) $(PREFIX)/bin/rawk
+	install -d -m 0755 $(PREFIX)/share/$(TARGET)/
 	cp -r ./site $(PREFIX)/share/$(TARGET)/
-	install -o $(USER) -g $(GROUP) ./README $(PREFIX)/share/$(TARGET)
+	install -m 0644 ./README $(PREFIX)/share/$(TARGET)
 	find $(PREFIX)/share/$(TARGET)/ -type f -exec chmod 644 '{}' \;
 	find $(PREFIX)/share/$(TARGET)/ -type d -exec chmod 755 '{}' \;
 	install -m 0755 -d $(MANDIR)/man1
 	install -m 0755 -d $(MANDIR)/man5
-	install -o $(USER) -g $(GROUP) -m 0444 rawk.1 $(MANDIR)/man1/
-	install -o $(USER) -g $(GROUP) -m 0444 rawkrc.5 $(MANDIR)/man5/
+	install -m 0644 rawk.1 $(MANDIR)/man1/
+	install -m 0644 rawkrc.5 $(MANDIR)/man5/
 
 remove:
 	rm -f  $(PREFIX)/bin/$(TARGET)
@@ -29,6 +30,7 @@ dist:
 	-cp * $(TARGET)-$(VERSION)
 	-cp -r site $(TARGET)-$(VERSION)
 	-cp -r test $(TARGET)-$(VERSION)
+	-cp -r debian $(TARGET)-$(VERSION)
 	-tar czf $(TARGET)-$(VERSION).tgz $(TARGET)-$(VERSION)
 
 htmldoc:
@@ -36,7 +38,8 @@ htmldoc:
 	-mandoc -Thtml rawkrc.5 > rawkrc.5.html
 
 clean:
-	-rm -rf $(TARGET)-$(VERSION)*
+	-rm -rf $(TARGET)-$(VERSION)
+	-rm -rf $(TARGET)-$(VERSION).tgz
 	-cd test && make clean
 
 distclean: clean
