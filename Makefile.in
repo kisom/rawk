@@ -24,14 +24,13 @@ remove:
 	rm -f  $(PREFIX)/bin/$(TARGET)
 	rm -rf $(PREFIX)/share/$(TARGET)
 
-dist: 
-	-find . -iname .\*.\* -print -exec rm {} \;
+dist:
 	-mkdir $(TARGET)-$(VERSION)
 	-cp * $(TARGET)-$(VERSION)
 	-cp -r site $(TARGET)-$(VERSION)
 	-cp -r test $(TARGET)-$(VERSION)
 	-cp -r debian $(TARGET)-$(VERSION)
-	-tar czf $(TARGET)-$(VERSION).tgz $(TARGET)-$(VERSION)
+	-tar czf $(TARGET)_$(VERSION).orig.tar.gz $(TARGET)-$(VERSION)
 
 htmldoc:
 	-mandoc -Thtml rawk.1 > rawk.1.html
