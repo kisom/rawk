@@ -1,4 +1,3 @@
-PREFIX ?=	$(DESTDIR)
 PREFIX ?=	$PREFIX
 TARGET :=	rawk
 VERSION :=	1.3.3
