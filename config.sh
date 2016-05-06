@@ -1,7 +1,6 @@
 #!/bin/sh
 
-TARGET="$(cat Makefile.in | grep 'TARGET :=' | awk -F' ' '{ print $3; }')"
-echo "configuring ${TARGET}"
+awk -F' ' '/TARGET :=/{ print "configuring " $3 }' Makefile.in
 OPSYS="$(uname -s)"
 
 which sed 2>/dev/null 1>/dev/null
