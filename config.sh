@@ -21,8 +21,5 @@ else
 fi
 
 echo "writing new Makefile"
-cat Makefile.in | sed -e "s|\$PREFIX|${PREFIX}|" |              \
-                  sed -e "s|\$MANDIR|${MANDIR}|"        > Makefile
-
-
+sed -e "s|\$PREFIX|${PREFIX}|;s|\$MANDIR|${MANDIR}|" Makefile.in > Makefile
 echo "done."
