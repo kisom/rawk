@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 awk -F' ' '/TARGET :=/{ print "configuring " $3 }' Makefile
 OPSYS="$(uname -s)"
