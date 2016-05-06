@@ -12,9 +12,8 @@ if [ -z "${PREFIX}" ]; then
     PREFIX="/usr/local"
 fi    
 
-if [ "${PREFIX}" = "/usr" ]; then
-    MANDIR="${PREFIX}/share/man"
-elif [ "${PREFIX}" = "/usr/local" -a "${OPSYS}" = "Darwin" ]; then
+if [ "${PREFIX}" = "/usr" ] ||
+   [ "${PREFIX}" = "/usr/local" -a "${OPSYS}" = "Darwin" ]; then
     MANDIR="${PREFIX}/share/man"
 else
     MANDIR="${PREFIX}/man"
