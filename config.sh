@@ -14,12 +14,8 @@ fi
 
 if [ "${PREFIX}" = "/usr" ]; then
     MANDIR="${PREFIX}/share/man"
-elif [ "${PREFIX}" = "/usr/local" ]; then
-    if [ "${OPSYS}" = "Darwin" ]; then
-        MANDIR="${PREFIX}/share/man"
-    else
-        MANDIR="${PREFIX}/man"
-    fi
+elif [ "${PREFIX}" = "/usr/local" -a "${OPSYS}" = "Darwin" ]; then
+    MANDIR="${PREFIX}/share/man"
 else
     MANDIR="${PREFIX}/man"
 fi
