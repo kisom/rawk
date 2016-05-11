@@ -118,7 +118,7 @@ rawk_main () {
     # and convert md->html
     for src_f in $(find . -iname \*.md -print | xargs)
     do
-        out_f="$(echo $src_f | sed -e 's/\([[:alnum:]]*\)\.[mM][dD]/\1/').html"
+        out_f="${src_f%.[Mm][Dd]}.html"
         echo "* $src_f -> $out_f"
         rawk_page $src_f > $out_f
         rm $src_f
