@@ -73,7 +73,7 @@ rawk_page() {
     if [ -n "$uname_comment" ]; then
         printf "\n<!-- page build stats: -->\n"
         printf "<!-- "
-        printf "shell: $(head -1 $0 | sed -e 's/^#!\([/[[:alnum:]]]*\)/\1/')"
+        printf "shell: $(sed -e 's/^#!\([/[[:alnum:]]]*\)/\1/;q' $0)"
         printf "\tos: $(uname -rms) -->\n"
         printf "<!-- generated on $(date) -->\n\n"
     fi
