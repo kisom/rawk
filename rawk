@@ -116,12 +116,13 @@ rawk_main () {
 
     # here's where we need to load in the list of files
     # and convert md->html
-    for src_f in $(find . -iname \*.md -print | xargs)
+    find -iname \*.md -print0 |
+    while read -d '' src_f
     do
         out_f="${src_f%.[Mm][Dd]}.html"
         echo "* $src_f -> $out_f"
-        rawk_page $src_f > $out_f
-        rm $src_f
+        rawk_page "$src_f" > "$out_f"
+        rm "$src_f"
     done
 }
 
