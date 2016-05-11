@@ -25,12 +25,12 @@ rawk_template() {
     page_title="$(echo ${1##*/} | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
 
     # sedden death
-    rawk_tpl=$(cat $2 | sed -e "s|\${title}|$site_title|g"          \
-                            -e "s|\${subtitle}|$site_subtitle|g"    \
-                            -e "s|\${page_title}|$page_title|g"     \
-                            -e "s|\${site_root}|$site_root|g"       \
-                            -e "s|\${date}|$(date)|g"               \
-                            -e "s|\${root_link}|${site_root}index.html|g"
+    rawk_tpl=$(sed -e "s|\${title}|$site_title|g"          \
+                   -e "s|\${subtitle}|$site_subtitle|g"    \
+                   -e "s|\${page_title}|$page_title|g"     \
+                   -e "s|\${site_root}|$site_root|g"       \
+                   -e "s|\${date}|$(date)|g"               \
+                   -e "s|\${root_link}|${site_root}index.html|g" $2
     )
     echo "$rawk_tpl"
 }
@@ -73,7 +73,7 @@ rawk_page() {
     if [ -n "$uname_comment" ]; then
         printf "\n<!-- page build stats: -->\n"
         printf "<!-- "
-        printf "shell: $(head -1 $0 | sed -e 's/^#!\([/[[:alnum:]]]*\)/\1/')"
+        printf "shell: $(sed -e 's/^#!\([/[[:alnum:]]]*\)/\1/;q' $0)"
         printf "\tos: $(uname -rms) -->\n"
         printf "<!-- generated on $(date) -->\n\n"
     fi
@@ -116,12 +116,13 @@ rawk_main () {
 
     # here's where we need to load in the list of files
     # and convert md->html
-    for src_f in $(find . -iname \*.md -print | xargs)
+    find -iname \*.md -print0 |
+    while read -d '' src_f
     do
-        out_f="$(echo $src_f | sed -e 's/\([[:alnum:]]*\)\.[mM][dD]/\1/').html"
+        out_f="${src_f%.[Mm][Dd]}.html"
         echo "* $src_f -> $out_f"
-        rawk_page $src_f > $out_f
-        rm $src_f
+        rawk_page "$src_f" > "$out_f"
+        rm "$src_f"
     done
 }
 
