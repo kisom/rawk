@@ -110,7 +110,7 @@ rawk_main () {
         mkdir styles
     fi
 
-    echo "$stylesheet" >styles/style.css
+    cp "$stylesheet" styles/style.css
 
     # here's where we need to load in the list of files
     # and convert md->html
@@ -129,7 +129,6 @@ rawk_main () {
 . ./$conf_file
 hdr_tpl="$(pwd)/$hdr_tpl"
 ftr_tpl="$(pwd)/$ftr_tpl"
-stylesheet="$(cat $stylesheet)"
 
 rawk_main $@
 
