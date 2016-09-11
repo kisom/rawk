@@ -22,15 +22,20 @@ usage() {
 
 # $1->filename $2->template
 rawk_template() {
-    page_title="$(echo ${1##*/} | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
-
-    # sedden death
-    sed -e "s|\${title}|$site_title|g"          \
-        -e "s|\${subtitle}|$site_subtitle|g"    \
-        -e "s|\${page_title}|$page_title|g"     \
-        -e "s|\${site_root}|$site_root|g"       \
-        -e "s|\${date}|$(date)|g"               \
-        -e "s|\${root_link}|${site_root}index.html|g" $2
+    # Following script reads substitutions from stdin
+    awk '
+	function get_ex(t) { RS="[ \t]+"; getline t < "-"; RS="\n"; return t }
+	BEGIN { while (getline su["\$\{" get_ex() "\}"] < "-" != 1); }
+	BEGIN { su["\$\{date\}] = strftime() } # Date
+	BEGIN { sub(/\.[^.]*$/, "", su["\$\{page_title\}"]) } # Fix title
+	{ for (v in su) gsub(v, su[v]); print } # Apply substitutions and print
+    ' "$2" <<-!
+	title		$site_title
+	subtitle	$site_subtitle
+	site_root	$site_root
+	root_link	${site_root}index.html
+	page_title	${1##*/}
+	!
 }
 
 rawk_submenu() {
