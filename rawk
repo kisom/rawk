@@ -103,18 +103,13 @@ rawk_main () {
         target="$(pwd)/${src_dir##*/}.build"
     fi
 
-    if [ ! -d "${target}" ]; then
-        mkdir ${target}
-    fi
+    mkdir -p "$target"
 
     # copy over target dir
     cp -r ${src_dir}/* ${target}/
     cd ${target}
 
-    if [ ! -d styles ]; then
-        mkdir styles
-    fi
-
+    mkdir -p styles
     cp "$stylesheet" styles/style.css
 
     # here's where we need to load in the list of files
