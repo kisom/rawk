@@ -68,17 +68,23 @@ rawk_submenu() {
     printf "\n</div>\n"
 }
 
+get_shell() {
+	sed -e 's/..//;s/[\t ].*/;q' $0
+}
+
 rawk_page() {
     rawk_template $1 $hdr_tpl
     rawk_submenu $1
     
     echo '<div id="main">'
     if [ -n "$uname_comment" ]; then
-        printf "\n<!-- page build stats: -->\n"
-        printf "<!-- "
-        printf "shell: $(sed -e 's/^#!\([/[[:alnum:]]]*\)/\1/;q' $0)"
-        printf "\tos: $(uname -rms) -->\n"
-        printf "<!-- generated on $(date) -->\n\n"
+	cat <<-!
+
+		<!-- page build stats: -->
+		<!-- shell: $(get_shell)	os: $(uname -rms) -->
+		<!-- generated on $(date) -->
+
+	!
     fi
     $mdparser $1
     echo '</div>'
@@ -133,4 +139,3 @@ ftr_tpl="$(pwd)/$ftr_tpl"
 rawk_main $@
 
 # fin
-
