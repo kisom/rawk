@@ -1,7 +1,7 @@
-PREFIX ?=	$PREFIX
+include .config
+
 TARGET :=	rawk
 VERSION :=	1.3.3
-MANDIR :=	$(PREFIX)/share/man/man1
 
 all: 
 	@echo "use 'make install' to install $(TARGET)"

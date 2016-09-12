@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/sh -e
 
-awk -F' ' '/TARGET :=/{ print "configuring " $3 }' Makefile.in
+awk -F' ' '/TARGET :=/{ print "configuring " $3 }' Makefile
 OPSYS="$(uname -s)"
 
 which sed 2>/dev/null 1>/dev/null
@@ -12,14 +12,16 @@ if [ -z "${PREFIX}" ]; then
     PREFIX="/usr/local"
 fi    
 
-if [ "${PREFIX}" = "/usr" ]; then
-    MANDIR="${PREFIX}/share/man"
-elif [ "${PREFIX}" = "/usr/local" -a "${OPSYS}" = "Darwin" ]; then
+if [ "${PREFIX}" = "/usr" ] ||
+   [ "${PREFIX}" = "/usr/local" -a "${OPSYS}" = "Darwin" ]; then
     MANDIR="${PREFIX}/share/man"
 else
     MANDIR="${PREFIX}/man"
 fi
 
-echo "writing new Makefile"
-sed -e "s|\$PREFIX|${PREFIX}|;s|\$MANDIR|${MANDIR}|" Makefile.in > Makefile
+echo "writing .config"
+cat >".config" <<EOF
+PREFIX = $PREFIX
+MANDIR = $MANDIR
+EOF
 echo "done."
