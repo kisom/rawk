@@ -22,15 +22,20 @@ usage() {
 
 # $1->filename $2->template
 rawk_template() {
-    page_title="$(echo ${1##*/} | sed -e 's/^\(..*\)\...*$/\1/')" # get pagename
-
-    # sedden death
-    sed -e "s|\${title}|$site_title|g"          \
-        -e "s|\${subtitle}|$site_subtitle|g"    \
-        -e "s|\${page_title}|$page_title|g"     \
-        -e "s|\${site_root}|$site_root|g"       \
-        -e "s|\${date}|$(date)|g"               \
-        -e "s|\${root_link}|${site_root}index.html|g" $2
+    # Following script reads substitutions from stdin
+    awk '
+	function get_ex(t) { RS="[ \t]+"; getline t < "-"; RS="\n"; return t }
+	BEGIN { while (getline su["\$\{" get_ex() "\}"] < "-" != 1); }
+	BEGIN { su["\$\{date\}] = strftime() } # Date
+	BEGIN { sub(/\.[^.]*$/, "", su["\$\{page_title\}"]) } # Fix title
+	{ for (v in su) gsub(v, su[v]); print } # Apply substitutions and print
+    ' "$2" <<-!
+	title		$site_title
+	subtitle	$site_subtitle
+	site_root	$site_root
+	root_link	${site_root}index.html
+	page_title	${1##*/}
+	!
 }
 
 rawk_submenu() {
@@ -63,17 +68,23 @@ rawk_submenu() {
     printf "\n</div>\n"
 }
 
+get_shell() {
+	sed -e 's/..//;s/[\t ].*/;q' $0
+}
+
 rawk_page() {
     rawk_template $1 $hdr_tpl
     rawk_submenu $1
     
     echo '<div id="main">'
     if [ -n "$uname_comment" ]; then
-        printf "\n<!-- page build stats: -->\n"
-        printf "<!-- "
-        printf "shell: $(sed -e 's/^#!\([/[[:alnum:]]]*\)/\1/;q' $0)"
-        printf "\tos: $(uname -rms) -->\n"
-        printf "<!-- generated on $(date) -->\n\n"
+	cat <<-!
+
+		<!-- page build stats: -->
+		<!-- shell: $(get_shell)	os: $(uname -rms) -->
+		<!-- generated on $(date) -->
+
+	!
     fi
     $mdparser $1
     echo '</div>'
@@ -98,19 +109,14 @@ rawk_main () {
         target="$(pwd)/${src_dir##*/}.build"
     fi
 
-    if [ ! -d "${target}" ]; then
-        mkdir ${target}
-    fi
+    mkdir -p "$target"
 
     # copy over target dir
     cp -r ${src_dir}/* ${target}/
     cd ${target}
 
-    if [ ! -d styles ]; then
-        mkdir styles
-    fi
-
-    echo "$stylesheet" >styles/style.css
+    mkdir -p styles
+    cp "$stylesheet" styles/style.css
 
     # here's where we need to load in the list of files
     # and convert md->html
@@ -129,9 +135,7 @@ rawk_main () {
 . ./$conf_file
 hdr_tpl="$(pwd)/$hdr_tpl"
 ftr_tpl="$(pwd)/$ftr_tpl"
-stylesheet="$(cat $stylesheet)"
 
 rawk_main $@
 
 # fin
-
