@@ -26,7 +26,7 @@ rawk_template() {
     awk '
 	function get_ex(t) { RS="[ \t]+"; getline t < "-"; RS="\n"; return t }
 	BEGIN { while (getline su["\$\{" get_ex() "\}"] < "-" != 1); }
-	BEGIN { su["\$\{date\}] = strftime() } # Date
+	BEGIN { su["\$\{date\}"] = strftime() } # Date
 	BEGIN { sub(/\.[^.]*$/, "", su["\$\{page_title\}"]) } # Fix title
 	{ for (v in su) gsub(v, su[v]); print } # Apply substitutions and print
     ' "$2" <<-!
