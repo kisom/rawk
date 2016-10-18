@@ -69,7 +69,7 @@ rawk_submenu() {
 }
 
 get_shell() {
-	sed -e 's/..//;s/[\t ].*/;q' $0
+	sed -e 's/..//;s/[\t ].*//;q' $0
 }
 
 rawk_page() {
