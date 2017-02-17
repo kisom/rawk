@@ -39,33 +39,24 @@ rawk_template() {
 }
 
 rawk_submenu() {
-    fbase="$(echo ${1##*/} | sed -e 's|\(.*\)\..[[:alnum:]]*|\1|')"
-    fc=""
-    file_list=""
-
-    # add cwd
-    echo '<div id="side-bar">'
-    echo '<a href="index.html">.</a> '
-
-    # parent
-    if [ "${1%/*}" != "." ]; then
-        echo '<a href="../index.html">..</a> '
-    fi
-
-    for filter in $bl
-    do
-        fc="$fc | grep -ve '$filter'"
-    done
-    
-    file_list="$(eval ls -1 $(echo ${1%/*}) $fc | sed -e 's/\.md\([ ]*\)/\.html\1/g' | uniq)"
-    file_list="$(echo \"$file_list\" | sort | xargs)"
-    for file in $file_list
-    do
-        printf "\n <a href=\"$(basename $file | sed -e 's/\.md$/\.html/g')\">"
-        printf "$(basename $file | sed -e 's/\(..*\)\.[[:alnum:]]*/\1/')"
-        printf "</a> "
-    done
-    printf "\n</div>\n"
+    dir="${1%/*}"
+    find "$dir" -mindepth 1 -maxdepth 1 -printf %f | sort |
+    awk -v bl="${bl## }" -v dir="$dir" '
+	BEGIN {
+		gsub(/[\n\t ]+/, "|", bl)
+		print "<div id=\"side-bar\">"
+		print "\t<a href=\"index.html\">.</a>" # cwd
+		if (dir != ".")
+			print "\t<a href=\"../index.html\">..</a>" # parent
+	}
+	/\.md$/ && $0 !~ bl {
+		sub(/[.][^.]+$/, "")
+		printf("\t<a href=\"%s.html\">%s</a>\n", $0, $0)
+	}
+	END {
+		print "</div>"
+	}
+    '
 }
 
 
