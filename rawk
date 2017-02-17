@@ -68,9 +68,6 @@ rawk_submenu() {
     printf "\n</div>\n"
 }
 
-get_shell() {
-	sed -e 's/..//;s/[\t ].*//;q' $0
-}
 
 rawk_page() {
     rawk_template $1 $hdr_tpl
@@ -81,7 +78,7 @@ rawk_page() {
 	cat <<-!
 
 		<!-- page build stats: -->
-		<!-- shell: $(get_shell)	os: $(uname -rms) -->
+		<!-- os: $(uname -rms) -->
 		<!-- generated on $(date) -->
 
 	!
