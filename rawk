@@ -40,7 +40,7 @@ rawk_template() {
 
 rawk_submenu() {
     dir="${1%/*}"
-    find "$dir" -mindepth 1 -maxdepth 1 -printf %f | sort |
+    find "$dir" -mindepth 1 -maxdepth 1 -printf %f\\n | sort |
     awk -v bl="${bl## }" -v dir="$dir" '
 	BEGIN {
 		gsub(/[\n\t ]+/, "|", bl)
