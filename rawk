@@ -82,43 +82,56 @@ rawk_page() {
 
 rawk_main () {
     # check to see which arguments we got
-    # if we got any, rename them for clarity
-    if [ -n "$1" ]; then
-        src_dir="$1"
-    elif [ -n "$2" ]; then 
-        target="$2"
-    fi
-
-    # at a minimum, require a source directory
-    if [ -z "${src_dir}" ]; then
+    case $# in
+    0)
         usage
-    elif [ -z "${target}" ]; then
-        # sane default
-        target="$(pwd)/${src_dir##*/}.build"
-    fi
+        exit 1
+        ;;
+    1)
+        set -- "$1" "${1##*/}.build"
+        ;;
+    esac
+    src_dir=$(readlink -f "$1")
+    target=$(readlink -f "$2")
 
     mkdir -p "$target"
 
-    # copy over target dir
-    cp -r ${src_dir}/* ${target}/
-    cd ${target}
+    if [ -n "$stylesheet" ]; then
+        mkdir -p "$target"/styles
+        cp -u "$stylesheet" "$target"/styles/style.css
+    fi
 
-    mkdir -p styles
-    cp "$stylesheet" styles/style.css
+    cd "$src_dir"
 
-    # here's where we need to load in the list of files
-    # and convert md->html
-    find -iname \*.md -print0 |
-    while read -d '' src_f
-    do
-        out_f="${src_f%.[Mm][Dd]}.html"
-        echo "* $src_f -> $out_f"
-        rawk_page "$src_f" > "$out_f"
-        rm "$src_f"
+    # convert/copy files
+    find -mindepth 1 -name \*~ -o -print0 |
+    while read -d '' i; do
+        i="${i#./}"
+        o="$target/$i"
+        case "$i" in
+        *.[Mm][Dd])
+            o="${o%.??}.html"
+            if [ "$i" -nt "$o" ]; then
+                rawk_page "$i" > "$o"
+            fi
+            ;;
+        *)
+            if [ -d "$i" ]; then
+                mkdir -p "$o"
+            else
+                cp -u "$i" "$o"
+            fi
+            ;;
+        esac
     done
 }
 
 # main()
+# Defaults
+mdparser=smu
+hdr_tpl=templates/hdr.tpl
+ftr_tpl=templates/ftr.tpl
+
 # source config file and check valid targets and source dirs
 . "./$conf_file"
 hdr_tpl="$(pwd)/$hdr_tpl"
