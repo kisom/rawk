@@ -61,8 +61,8 @@ rawk_submenu() {
 
 
 rawk_page() {
-    rawk_template $1 $hdr_tpl
-    rawk_submenu $1
+    rawk_template "$1" "$hdr_tpl"
+    rawk_submenu "$1"
     
     echo '<div id="main">'
     if [ -n "$uname_comment" ]; then
@@ -74,10 +74,10 @@ rawk_page() {
 
 	!
     fi
-    $mdparser $1
+    $mdparser "$1"
     echo '</div>'
 
-    rawk_template $1 $ftr_tpl
+    rawk_template "$1" "$ftr_tpl"
 }
 
 rawk_main () {
@@ -120,10 +120,10 @@ rawk_main () {
 
 # main()
 # source config file and check valid targets and source dirs
-. ./$conf_file
+. "./$conf_file"
 hdr_tpl="$(pwd)/$hdr_tpl"
 ftr_tpl="$(pwd)/$ftr_tpl"
 
-rawk_main $@
+rawk_main "$@"
 
 # fin
